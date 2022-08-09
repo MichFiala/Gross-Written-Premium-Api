@@ -1,4 +1,4 @@
 namespace App.Models
 {
-	public record AverageGrossWrittenPremiumDto(string LineOfBusinessName, double AvarageGrossWrittenPremium);
+	public record AverageGrossWrittenPremiumDto(int LineOfBusinessId, string LineOfBusinessName, double AvarageGrossWrittenPremium);
 }
