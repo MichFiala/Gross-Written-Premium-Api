@@ -1,22 +1,28 @@
-var builder = WebApplication.CreateBuilder(args);
+using Api;
+using Microsoft.EntityFrameworkCore;
+using Persistence;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	public static async Task Main(string[] args)
+	{
+		var host = CreateHostBuilder(args).Build();
+
+		using var scope = host.Services.CreateScope();
+
+		var services = scope.ServiceProvider;
+
+		var context = services.GetRequiredService<DataContext>();
+
+		await context.Database.MigrateAsync();
+        
+        await host.RunAsync();
+	}
+
+	public static IHostBuilder CreateHostBuilder(string[] args) =>
+	    Host.CreateDefaultBuilder(args)
+		   .ConfigureWebHostDefaults(webBuilder =>
+		   {
+			   webBuilder.UseStartup<Startup>();
+		   });
 }
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
