@@ -48,11 +48,11 @@ namespace Persistence
 				.WithMany(l => l.CountryLineOfBusinesses)
 				.HasForeignKey(x => x.LineOfBusinessId);
 
-			// ISeeder seeder = new Seeder();
+			ISeeder seeder = new Seeder();
 
-			// builder.Entity<Country>().HasData(seeder.Countries.ToArray());
-			// builder.Entity<LineOfBusiness>().HasData(seeder.LineOfBusinesses.ToArray());
-			// builder.Entity<CountryLineOfBusiness>().HasData(seeder.CountryLineOfBusinesses.ToArray());
+			builder.Entity<Country>().HasData(seeder.Countries.ToArray());
+			builder.Entity<LineOfBusiness>().HasData(seeder.LineOfBusinesses.ToArray());
+			builder.Entity<GrossWrittenPremium>().HasData(seeder.GrossWrittenPremia.ToArray());
 		}
 	}
 }
