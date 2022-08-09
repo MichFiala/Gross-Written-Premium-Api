@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api</name>
+    </assembly>
+    <members>
+        <member name="M:Api.Controllers.CountryGwp.AverageGrossWrittenPremium(Api.Controllers.CountryGwp.AverageGrossWrittenPremiumArguments)">
+            <summary>
+            Gets average gross written premium
+            </summary>
+            <param name="arguments">Passed arguments</param>
+            <remarks>
+            Sample request:
+            
+                POST server/api/gwp/avg
+                {        
+                  "countryId": 1,
+                  "lineOfBusinessIds": [1, 2]
+                }
+            </remarks>
+            <returns>All gross written premia for selected country and line of businesses</returns>
+            <response code="200">Returns all average values found</response>
+            <response code="400">If invalid parameter is passed</response>
+        </member>
+        <member name="M:Api.Controllers.CountryGwp.GetCountries">
+            <summary>
+            Gets all available countries
+            </summary>
+            <returns>All availabe countries</returns>
+            <response code="200">Returns all availabe countries</response>
+            <response code="400">If something wrong with database</response>
+        </member>
+        <member name="M:Api.Controllers.CountryGwp.GetLineOfBusinesses">
+            <summary>
+            Gets all available line of businesses
+            </summary>
+            <returns>All availabe line of businesses</returns>
+            <response code="200">Returns all availabe line of businesses</response>
+            <response code="400">If something wrong with database</response>
+        </member>
+    </members>
+</doc>
