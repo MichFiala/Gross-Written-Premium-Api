@@ -9,5 +9,9 @@ namespace Domain
         public DateTime DateTime { get; set; }
 
         public double GrossWrittenPremium { get; set; }
+
+        public Country Country { get; set; }
+
+        public LineOfBusiness LineOfBusiness { get; set; }
 	}
 }
