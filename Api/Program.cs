@@ -16,7 +16,7 @@ public class Program
 
 		await context.Database.MigrateAsync();
         
-        await host.RunAsync();
+          await host.RunAsync();
 	}
 
 	public static IHostBuilder CreateHostBuilder(string[] args) =>
