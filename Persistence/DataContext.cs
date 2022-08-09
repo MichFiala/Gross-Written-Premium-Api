@@ -1,6 +1,7 @@
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Persistence.Seed;
 
 namespace Persistence
 {
@@ -19,7 +20,7 @@ namespace Persistence
 
 		public virtual DbSet<LineOfBusiness> LineOfBusinesses { get; set; }
 
-		public virtual DbSet<CountryLineOfBusiness> CountryLineOfBusinesses { get; set; }
+		public virtual DbSet<GrossWrittenPremium> GrossWrittenPremia { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
@@ -37,17 +38,21 @@ namespace Persistence
 		{
 			base.OnModelCreating(builder);
 
-			builder.Entity<CountryLineOfBusiness>(x => x.HasKey(cl => new { cl.CountryId, cl.LineOfBusinessId }));
-
-			builder.Entity<CountryLineOfBusiness>()
+			builder.Entity<GrossWrittenPremium>()
 			    .HasOne(x => x.Country)
 			    .WithMany(c => c.CountryLineOfBusinesses)
 			    .HasForeignKey(x => x.CountryId);
 
-			builder.Entity<CountryLineOfBusiness>()
-				  .HasOne(x => x.LineOfBusiness)
-				  .WithMany(l => l.CountryLineOfBusinesses)
-				  .HasForeignKey(x => x.LineOfBusinessId);
+			builder.Entity<GrossWrittenPremium>()
+				.HasOne(x => x.LineOfBusiness)
+				.WithMany(l => l.CountryLineOfBusinesses)
+				.HasForeignKey(x => x.LineOfBusinessId);
+
+			// ISeeder seeder = new Seeder();
+
+			// builder.Entity<Country>().HasData(seeder.Countries.ToArray());
+			// builder.Entity<LineOfBusiness>().HasData(seeder.LineOfBusinesses.ToArray());
+			// builder.Entity<CountryLineOfBusiness>().HasData(seeder.CountryLineOfBusinesses.ToArray());
 		}
 	}
 }
